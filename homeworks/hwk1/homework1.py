@@ -5,6 +5,7 @@ import copy
 import pandas as pd
 import seaborn as sns
 import csv
+import os
 
 
 # Machine learning package.
@@ -235,8 +236,9 @@ def plot_freq_dist(data, color: str = "red", title: str = "N/A"):
 
 
 if __name__ == "__main__":
+    folder_path = "/Users/yan/machine_learning_spring2024"
     file_path = "housingUnits.csv"
-    data = read_csv(file_path)
+    data = read_csv(os.path.join(folder_path, file_path))
     all_columns = data[0:1, :]  # This selects all rows and all columns
     print(all_columns)
 
