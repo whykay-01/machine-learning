@@ -67,7 +67,7 @@ def plot_linear_regression(predictor, outcome, title="", xlab="", ylab=""):
     plt.xlabel(xlab)
     plt.ylabel(ylab)
     plt.title(title)
-    plt.legend()
+    # plt.legend()
 
     # Display R^2 score, betas, and intercept
     plt.text(
@@ -236,7 +236,7 @@ def plot_freq_dist(data, color: str = "red", title: str = "N/A"):
 
 
 if __name__ == "__main__":
-    folder_path = "/Users/yan/machine_learning_spring2024"
+    folder_path = "/Users/yan/machine_learning_spring2024/homeworks/hwk1"
     file_path = "housingUnits.csv"
     data = read_csv(os.path.join(folder_path, file_path))
     all_columns = data[0:1, :]  # This selects all rows and all columns
