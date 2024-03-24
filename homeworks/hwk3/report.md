@@ -66,15 +66,19 @@ interpretation of your findings and should answer the original question.
 
 ### Question 4: Build a random forest model. Doing so: What is the best predictor of diabetes and what is the AUC of this model?
 
-1. ABCD
-2. ABCD
-3. ABCD
+1. For this question, I have built a random forest model and created 21 separate models to assess the AUC of each respective one. After that, I have additionally performed the k-fold cross validation for sake of making sure that the model could be generalized. The pipeline stays the same for this question as it was in the previous ones, since the goal is similar.
+   
+2. The rationale pretty much is the same, its just that the approach and the modelling preference is different in this case. We are interested in exploring which binary classifier would be performing the best for this specific dataset, and thus using random forest is yet another way of achieving our ultimate goal. Therefore, I tried to build models and compare them against common benchmarks, which I introduced earlier.
+   
+3. Random forest produced a beatiful ROC curve, resulting in **AUC score of 80%**. Interestingly, as one might look at the accuracy scores of the training and validation datasets, we have incredibly high accuracy (~100%) for the training dataset and moderate results (~85-86%) for the validation, which I will address in the following section. Additionally, the best predictor for this model is **absense or presense of stroke**, as our model's performance dropped to 0.797, compared to the 0.8 of the full model. This is interesting, as it contradicts previous findings of importance of the BMI and health status.
 
 <img src="pics/question4_fig1.png" alt="Fig. 4.1 - ROC curve for the full random forest model" height="300">
 <img src="pics/question4_fig2.png" alt="Fig. 4.2 - Performance of different random forest models with a single dropped predictor" height="300">
 <img src="pics/question4_fig3.png" alt="Fig. 4.3 - Learning curve of the random forest model" height="300">
 
-4. ABCD
+4. As we have seen, there is a significant gap between the accuracy on the training set and the validation set, along with a high AUC which suggests potential overfitting of this random forest model. This might be because of a number of reasons, but I suggest that the main one would be imbalance of my classes in this dataset. It is obvious that we have more people without diabetes than people with. Thus, due to this significant imbalance. This is also illustrated and confirmed by the following figure. Thus, this model would not be the best one to judge upon the performance. Maybe this is a reason why we have totally different best predictor with this model.
+
+<img src="pics/class_imbalance.png" alt="Fig. 4.4 - Class imbalance" height="300">
 
 ---
 
@@ -83,6 +87,11 @@ interpretation of your findings and should answer the original question.
 1. ABCD
 2. ABCD
 3. ABCD
+
+<img src="pics/question5_fig1.png" alt="Fig. 4.1 - ROC curve for the full AdaBoost Classifier model" height="300">
+<img src="pics/question5_fig2.png" alt="Fig. 4.2 - Performance of different AdaBoost Classifier models with a single dropped predictor" height="300">
+<img src="pics/question5_fig3.png" alt="Fig. 4.3 - Learning curve of the AdaBoost Classifier model" height="300">
+
 4. ABCD
 
 ---
@@ -91,8 +100,10 @@ interpretation of your findings and should answer the original question.
 
 #### A) Which of these 5 models is the best to predict diabetes in this dataset? 
 
-
+I suggest that ironically very first (and the simplest one) logistic regression handles the binary classification of our dataset in the best possible way. This is because we managed to achieve both pretty high results for the AUC score (82% for the full model) and high accuracy of the results (~85-86%). Please see the evidence for this in the figures attached to the question 1, section 3. This trade-off between having high accuracy and high AUC score is the best one we saw accross all the models, and thus I suggest it is the best one so far to predict diabetes. 
 
 ---
 
 #### B) Tell us something interesting about this dataset that is not already covered by the questions above and that is not obvious.
+
+I found it interesting that the BMI index of the dataset is the only normally distributed continous varible in this entire dataset.
