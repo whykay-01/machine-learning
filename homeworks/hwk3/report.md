@@ -49,10 +49,18 @@ interpretation of your findings and should answer the original question.
 
 ### Question 3: Use a single, individual decision tree. Doing so: What is the best predictor of diabetes and what is the AUC of this model? 
 
-1. ABCD
-2. ABCD
-3. ABCD
-4. ABCD
+1. Here I build a single decision tree and evaluated its accuracy and AUC scores. Additionally, I have build 21 other models to figure out which predictor would be the most important one for this model.
+
+2. The intuition stays the same as in previous models, where I tried to build a model and compare it against common benchmarks. As usual, 21 additional models serve as a great way of estimating which exact predictor is the best one for my particular model and my guess would be that 
+
+3. The most significant predictor is for this model is **Body Mass Index**. The drop in the model's performance reaches its peak of **0.013226036025215548** when we have the lowest AUC score of **0.5818026023929124**, compared to the initial **0.5950286384181279** for the full model. Additionally, as one might look at the accuracy chart, we have incredibly high accuracy for the training dataset and moderate results for the validation, which I try to explain in the following section.
+
+
+<img src="pics/question3_fig1.png" alt="Fig. 3.1 - ROC curve for the full single decision tree model" height="300">
+<img src="pics/question3_fig2.png" alt="Fig. 3.2 - Performance of different single decision tree models with a single dropped predictor" height="300">
+<img src="pics/question3_fig3.png" alt="Fig. 3.3 - Learning curve of the single decision tree model" height="300">
+
+4. The reason for the accuracy being so high for the training set and a drop whenever we using validation set is simply because of the main drawback of the single decision trees, which is that they tend to overfit the training dataset (a.k.a. memorizing it entirely). Thus, the accuracy is nearly 100%, since we simply memorized the data during the training stage. This makes perfect sense once we look at the ROC curve and AUC score, since the model performs poorly when it is trying to classify whether a random person having diabetes is actually having diabetes and conversely. Thus we have low AUC scores and incredible accuracy. The best predictor interestingly stays the same even though we poorly handle classification, we do recognize the importance of **body mass index**. 
 
 ---
 
@@ -61,6 +69,11 @@ interpretation of your findings and should answer the original question.
 1. ABCD
 2. ABCD
 3. ABCD
+
+<img src="pics/question4_fig1.png" alt="Fig. 4.1 - ROC curve for the full random forest model" height="300">
+<img src="pics/question4_fig2.png" alt="Fig. 4.2 - Performance of different random forest models with a single dropped predictor" height="300">
+<img src="pics/question4_fig3.png" alt="Fig. 4.3 - Learning curve of the random forest model" height="300">
+
 4. ABCD
 
 ---
