@@ -72,40 +72,41 @@
 2. The rationale pretty much is the same, its just that the approach and the modelling preference is different in this case. We are interested in exploring which binary classifier would be performing the best for this specific dataset, and thus using random forest is yet another way of achieving our ultimate goal. Therefore, I tried to build models and compare them against common benchmarks, which I introduced earlier.
 3. Random forest produced a beatiful ROC curve, resulting in **AUC score of 80%**. Interestingly, as one might look at the accuracy scores of the training and validation datasets, we have incredibly high accuracy (~100%) for the training dataset and moderate results (~85-86%) for the validation, which I will address in the following section. Additionally, the best predictor for this model is **absense or presense of stroke**, as our model's performance dropped to 0.797, compared to the 0.8 of the full model. This is interesting, as it contradicts previous findings of importance of the BMI and health status.
 
-<img src="pics/question4_fig1.png" alt="Fig. 4.1 - ROC curve for the full random forest model" height="300">
-<img src="pics/question4_fig2.png" alt="Fig. 4.2 - Performance of different random forest models with a single dropped predictor" height="300">
-<img src="pics/question4_fig3.png" alt="Fig. 4.3 - Learning curve of the random forest model" height="300">
+<figure>
+  <img src="pics/question3_fig1.png" alt="Fig. 3.1 - Heat map of different models and AUC scores" height="300">
+  <figcaption>Fig. 3.1 - Heat map of different models and AUC scores.</figcaption>
+</figure>
 
 4. As we have seen, there is a significant gap between the accuracy on the training set and the validation set, along with a high AUC which suggests potential overfitting of this random forest model. This might be because of a number of reasons, but I suggest that the main one would be imbalance of my classes in this dataset. It is obvious that we have more people without diabetes than people with. Thus, due to this significant imbalance. This is also illustrated and confirmed by the following figure. Thus, this model would not be the best one to judge upon the performance. Maybe this is a reason why we have totally different best predictor with this model.
-
-<img src="pics/class_imbalance.png" alt="Fig. 4.4 - Class imbalance" height="300">
 
 ---
 
 ### Question 5: Build and train a neural network of your choice to predict BMI from the rest of your dataset. How low can you get RMSE and what design choices does RMSE seem to depend on?
 
-1. For this question, the pipeline of actions stays pretty much the same -- building a full model, estimating the AUC score for it, then creating 21 separate models and evaluating them one by one. Traditionally, I have been working on the cross validation for this dataset to show the learning curve trajectory.
-2. I have made sure that we validate all the results on the fly and tune the hypermaraters by performing k-fold cross validation on the training and validation sets. I also made sure to use the default setting of the AdaBoost provided by the `sklearn` library to avoid overcomplication of the model. This is because the dataset we are using has >250k datapoints and 21 features we have to train on, and adaboost could become computationally intense in these cases.
-3. I have got the following results with best predictor being **absense or presense of physical activity** with a drop in the model's performance of **0.025404998419649383** points. I would also like to notice that this predictor is merely the best one, since many more predictors showed almost the same degree of importance. Thus, adaboost was not an efficient way of analyzing which predictor would be the best one due to the ambiguity of the importance of all these factors.
+1. For this question, the pipeline of my actions was to create a deep network where each following layer would have a decreasing number of neurons. I have used ReLU activation since it is the best performing activation function so far. Finally, I have estimated the RMSE scores as it was training through the epochs and plotted it to realize the progression of my RMSE.
+2. For this question, I thought that since we are trying to perform a regression task on the dataset, it would be a good idea to build a deep network with a decreasing number of neurons per layer. This is a common practice in the deep learning community, as it is believed that the model would be able to learn the most important features of the dataset and would be able to generalize better. Thus, I have built a model and trained it on the dataset.
+3. I have got the following results with best RMSE score being **6.2396045**. RMSE seemed to depend on the activation function and the number of neurons per layer. Also, my design choice of methodologically decreasing the number of neurons from layer to layer seemed to be working exceptionally well, as I have managed to achieve the best RMSE score with this approach.
 
-<img src="pics/question5_fig1.png" alt="Fig. 5.1 - ROC curve for the full AdaBoost Classifier model" height="300">
-<img src="pics/question5_fig2.png" alt="Fig. 5.2 - Performance of different AdaBoost Classifier models with a single dropped predictor" height="300">
-<img src="pics/question5_fig3.png" alt="Fig. 5.3 - Learning curve of the AdaBoost Classifier model" height="300">
+<figure>
+  <img src="pics/question5_fig1.png" alt="Fig. 5.1 - RMSE vs. epochs function" height="300">
+  <figcaption>Fig. 5.1 - RMSE vs. epochs function.</figcaption>
+</figure>
 
-4. Interestingly, the performance of AdaBoost Classifier was not significantly better than the one for the single decision tree classifier. I presume that this is because AdaBoost classifier is using the decision tree under the hood and since I have not involved any significant feature engineering tactics to improve the performance of this model, it has not been quite as effective as it might have been.
+4. I have to say that the model design and arhictectual decisions I made was due to the previous experience I got when working on the previous question. This has led to an increased intuition about what are the most influencing factors when building a model. I have to say that the most important factor for this model was the number of neurons per layer and the activation function. I have tried to decrease the number of neurons per layer, as it is a common practice in the deep learning community. This has led to the best RMSE score I have achieved so far.
 
 ---
 
 ### Extra Credit
 
-#### A) Which of these 5 models is the best to predict diabetes in this dataset?
+#### A) Are there any predictors/features that have effectively no impact on the accuracy of these models? If so, please list them and comment briefly on your findings
 
-I suggest that ironically very first (and the simplest one) logistic regression handles the binary classification of our dataset in the best possible way. This is because we managed to achieve both pretty high results for the AUC score (82% for the full model) and high accuracy of the results (~85-86%). Please see the evidence for this in the **figures attached to the question 1, section 3**. This trade-off between having high accuracy and high AUC score is the best one we saw accross all the models, and thus I suggest it is the best one so far to predict diabetes.
+I do believe that the zodiac sign has absolutely no impact on the accuracy of the models. This is due to the fact that the zodiac sign is a random variable and it is not related to the health status of the person. This is also confirmed by the fact that the zodiac sign was not the most important predictor in any of the models I have built. Thus, I would suggest that the zodiac sign is not a good predictor for the health status of the person and thus it was dropped from the dataset before the analysis.
 
 ---
 
-#### B) Tell us something interesting about this dataset that is not already covered by the questions above and that is not obvious.
+#### B) Write a summary statement on the overall pros and cons of using neural networks to learn from the same dataset as in the prior homework, relative to using classical methods (logistic regression, SVM, trees, forests, boosting methods). Any overall lessons?
 
-I found it interesting that the BMI index of the dataset is the only normally distributed continous varible in this entire dataset. This is again a sort of a verification that the data is real and not synthetically infused.
-
-## <img src="pics/BMI_distribution.png" alt="Fig. 6.1 - BMI frequency distribution" height="300">
+1. Training is slow. Especially if NN are deep and complex.
+2. They tend to overfit and memorize the data. This is always a problem and thus we need to make sure the solution is generalizable by penalizing the model for overcomplexity.
+3. NN are good at learning complex patterns in the data. This is a good thing, as we can learn from the data more effectively.
+4. I noticed that our case was extremely prone to the random seed I passed when splitting the dataset. This is not good, as it requires a lot of training and taking averages to make sure that the model is generalizable. This is a big drawback of the NN, as we never would have deterministic outputs of models
