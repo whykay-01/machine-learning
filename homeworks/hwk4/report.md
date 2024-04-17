@@ -1,26 +1,34 @@
-### Homework #3: Diabetes prediction. Machine Learning, Spring 2024
+### Homework #4: Diabetes prediction with artificial neural networks. Machine Learning, Spring 2024
 
 ### Yan Konichshev; yk2602
 
 ---
 
-### Question 1: Build a logistic regression model. Doing so: What is the best predictor of diabetes and what is the AUC of this model?
+### Question 1: Build and train a Perceptron (one input layer, one output layer, no hidden layers and no activation functions) to classify diabetes from the rest of the dataset. What is the AUC of this model?
 
-1. First of all, data cleaning. I have prepared the data by examining the frequency distributions and understanding the essense of the data we are working with. Surprisingly, there were almost no rows containing NaN values, so I simply dropped them and normalized all the categorical and ordinal variables (i.e. BMI, general/mental/physical health and etc.) After that was done, I have one-hot-encoded categorical (sex and zodiac sign) variables, and built a simple logistic regression model training it using the preprocessed data. Additionally, I have performed a 10 fold cross validation to tune hyperparameters achieve better generalization of the model.
+1. First of all, data cleaning. I have prepared the data by examining the frequency distributions and understanding the essense of the data we are working with. Surprisingly, there were almost no rows containing NaN values, so I simply dropped them and standardized all the categorical and ordinal variables (i.e. BMI, general/mental/physical health and etc.) After that was done, I have one-hot-encoded categorical (sex and zodiac sign) variables, and built a simple perceptron. No hidden layers, just inputs are matched to the outputs without intermediary middlemen. 
 
-<img src="pics/question1_fig1.png" alt="Fig. 1.1 - Zodiac Sign Distribution" height="300">
+2. I cleaned the data the way I did, simply because I wanted to derive all my predictors to a common scale, so that the model will see which predictors should be given more weight by itself. I have decided to drop the zodiac sign predictor because it is not being helpful in predicting diseases as all the samples we had in the dataset were uniformly distributed (discussed this in the previous homework assignment) with regards to the zodiac sign as we have seen above.
+   
+3. I have found that the AUC for the approach I exploited for the logistic regression model is **0.752**, which is not surprizing given that my neural model is barely learning anything about the dataset. In addition to that, I have found out that the perfomance of the model is really not that good, as we have low recall (0.51), low F1 score (0.37), and low precision (0.29) when predicting the presence of diabetes.
 
-2. I cleaned the data the way I did, simply because I wanted to derive all my predictors to a common scale, so that the model will see which predictors should be given more weight by itself. I have decided to perform a 10-fold CV strategy to make sure that my model would be more or less uniformly performant whenever it sees "new" data. I have decided to drop the zodiac sign predictor because it is not being helpful in predicting diseases as all the samples we had in the dataset were uniformly distributed with regards to the zodiac sign as we have seen above. For figuring what would be the best predictor, I have decided to systematically approach this problem and create 21 different models where we I dropped one predictor at a time to figure out where we have the biggest drop in model performance.
+<figure>
+  <img src="pics/question1_fig1.png" alt="Fig. 1.1 - This is a description of the image." height="300">
+  <figcaption>Fig. 1.1 - This is a description of the image.</figcaption>
+</figure>
+<figure>
+  <img src="pics/question1_fig2.png" alt="Fig. 1.2 - This is a description of the image." height="300">
+  <figcaption>Fig. 1.2 - This is a description of the image.</figcaption>
+</figure>
+<figure>
+  <img src="pics/question1_fig3.png" alt="Fig. 1.3 - This is a description of the image." height="300">
+  <figcaption>Fig. 1.3 - This is a description of the image.</figcaption>
+</figure>
 
-3. I have found that the AUC for the approach I exploited for the logistic regression model is **0.82**, which is quite good given the simple nature of the model and approach I am utilizing. In addition to that, I have found out that the most relevant predictor in my case is **General Health** with a drop of **0.01585844970860062**.Finally, the model also does have a pretty high accuracy of about **0.835**. Please see the graphs below for more details (ROC curve, learning curve for the CV splitter, and performance of different models with one predictor being dropped).
-
-<img src="pics/question1_fig2.png" alt="Fig. 1.2 - ROC curve for the full model" height="300">
-<img src="pics/question1_fig3.png" alt="Fig. 1.3 - Performance of different LogReg models with a single dropped predictor" height="300">
-<img src="pics/question1_fig4.png" alt="Fig. 1.4 - Learning curve of the LogReg model" height="300">
-
-4. It turned out that the model performance is pretty good, as the AUC for this logreg model is 0.82, meaning it 82% of the time whenever our model is trying to classify whether a random person having diabetes is actually having diabetes and the person who doesn't have diabetes is marked as not having diabetes it works properly. Which is 32% percent better than simple guessing, which gives the model a significant advantage and importance. Additionally, **general health and BMI** are apparently the most useful factors in predicting diabetes based on this model, which makes sense as domain knowledge of the disease supports these outcomes.
+4. Although I am having quite an impressive AUC score, it doesn't necessarily mean that my model is doing great. Given the recall, precision, and F1 numbers I got for the the prediction of 1 (having diabetes), it rather means that model is mostly calling that patient not ill simply because there is a higher probabilistic chance of having a 0, rather than 1. Thus, there is a need for us to investigate further models and approaches of making relevant improvements to the NN architecture in pursuit of better scores.
 
 ---
+# NOT FINISHED YET
 
 ### Question 2: Build a SVM. Doing so: What is the best predictor of diabetes and what is the AUC of this model?
 
