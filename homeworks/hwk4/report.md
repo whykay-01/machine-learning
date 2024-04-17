@@ -28,7 +28,7 @@
 
 1. For this task, I build and trained 9 different models, combining different activation functions and number of neurons in the single hidden layer. After that, I estimated the performance of the models by evaluating the AUC + RMSEs for every model and mapping them to the heatmaps.
 2. The rational for this question is simply to run through all the potential solutions and see which one would be the best one for my dataset. I have tried to build a model and compare it against common benchmarks, after that taking the best performing one and analyzing it.
-3. I have found that AUC is definetely sensitive with respect to the number of hidden layers and the activation function used. The best AUC score I have achieved was **0.70** with the following configuration: 1 hidden layer, 15 neurons, and Sigmoid activation function. This is roughly as good as the Perceptron model, but it is still not the best one. The best RMSE score I have achieved was **0.35** with the following same configurations.
+3. I have found that AUC is definetely sensitive with respect to the number of hidden layers and the activation function used. The best AUC score I have achieved was **0.73** with the following configuration: 1 hidden layer, 15 neurons, and Sigmoid activation function. This is roughly as good as the Perceptron model, but it is still not the best one. The best RMSE score I have achieved was **0.37** with the following same configurations.
 
 <figure>
   <img src="pics/question2_fig1.png" alt="Fig. 2.1 - Heat map of different models and AUC scores" height="300">
