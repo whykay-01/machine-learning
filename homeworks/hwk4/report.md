@@ -24,13 +24,11 @@
 
 ---
 
-# NOT FINISHED YET
-
 ### Question 2: Build and train a feedforward neural network with at least one hidden layer to classify diabetes from the rest of the dataset. Make sure to try different numbers of hidden layers and different activation functions (at a minimum reLU and sigmoid). Doing so: How does AUC vary as a function of the number of hidden layers and is it dependent on the kind of activation function used (make sure to include “no activation function” in your comparison). How does this network perform relative to the Perceptron?
 
-1. For this task, I followed a similar pipeline with the data I cleaned for the previous question. I have build a Linear SVM so it would converge quickly with my dataset and then estimated its accuracy using k-fold strategy and hypermarater tuning. Finally, I have estimated the AUC score for the full model and for 21 other models with dropped predictors to find out which one is the most significant for this model.
-2. The rational for this question is simply to run through all the metrics that are available to us (and which I have used in the previous tasks) to compare the model performance against the common baseline. As usual, I used cross validation strategy to make sure that the model would be easily generalizable with new data.
-3. I have found that the most important predictor for this approach was **BMI** with the AUC dropping down from **0.5314609773465011** by **0.015371866003117907**. But generally, I must admit that this model **was not** as performative as the previous one. I am attaching the results I got and I will discuss them in the following section.
+1. For this task, I build and trained 9 different models, combining different activation functions and number of neurons in the single hidden layer. After that, I estimated the performance of the models by evaluating the AUC + RMSEs for every model and mapping them to the heatmaps.
+2. The rational for this question is simply to run through all the potential solutions and see which one would be the best one for my dataset. I have tried to build a model and compare it against common benchmarks, after that taking the best performing one and analyzing it.
+3. I have found that AUC is definetely sensitive with respect to the number of hidden layers and the activation function used. The best AUC score I have achieved was **0.70** with the following configuration: 1 hidden layer, 15 neurons, and Sigmoid activation function. This is roughly as good as the Perceptron model, but it is still not the best one. The best RMSE score I have achieved was **0.35** with the following same configurations.
 
 <figure>
   <img src="pics/question2_fig1.png" alt="Fig. 2.1 - Heat map of different models and AUC scores" height="300">
@@ -41,7 +39,7 @@
   <figcaption>Fig. 2.2 - Heat map of different models and RMSE scores.</figcaption>
 </figure>
    
-4. The main reason for such a relatively high accuracy and low AUC score is mainly due to the linearly inseparable nature of the data we are working with. Additionally, since diabetes is rather uncommon, it is easy for the model to keep calling that the person is not ill and getting an accuracy score higher. Finally, I have to say that the best predictor of diabetes in this approach would be BMI, which is surprizing as it was second best predictor in the previous model. This implies that there is a real significance in the BMI as in the diabetes prediction marker.
+4. I can say that one layer was not enough to learn all the features of the data, and thus comes the result even poorer than the Perceptron. One potential reason could be because we don't have enough layers to get to the actual feature extraction. The results I got are interesting as the Sigmoid function is not the best performing activation function for NN, but it seems to be the best one for this particular dataset. This is also confirmed by the RMSE scores, as the best RMSE score was achieved with the same configuration. It is also worth mentioning that all the models were sensitive to the random seed of the train/test data split. This implies that the model is not generalizable and we need to take averages of the models to make sure that the model is generalizable.
 
 ---
 
