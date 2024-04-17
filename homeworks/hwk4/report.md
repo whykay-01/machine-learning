@@ -45,7 +45,7 @@
 
 ### Question 3: Build and train a “deep” network (at least 2 hidden layers) to classify diabetes from the rest of the dataset. Given the nature of this dataset, is there a benefit of using a CNN for the classification?
 
-1. Here I build a single decision tree and evaluated its accuracy and AUC scores. Additionally, I have build 21 other models to figure out which predictor would be the most important one for this model.
+1. Here I build 81 models and evaluated their RMSE and AUC scores. I have used CrossEntropyLoss as the loss function and SGD as the optimizer. There are so many models
 
 2. The intuition stays the same as in previous models, where I tried to build a model and compare it against common benchmarks. As usual, 21 additional models serve as a great way of estimating which exact predictor is the best one for my particular model and my guess would be that
 
@@ -66,16 +66,16 @@
 
 ### Question 4: Build and train a feedforward neural network with one hidden layer to predict BMI from the rest of the dataset. Use RMSE to assess the accuracy of your model. Does the RMSE depend on the activation function used?
 
-1. For this question, I have built a random forest model and created 21 separate models to assess the AUC of each respective one. After that, I have additionally performed the k-fold cross validation for sake of making sure that the model could be generalized. The pipeline stays the same for this question as it was in the previous ones, since the goal is similar.
-2. The rationale pretty much is the same, its just that the approach and the modelling preference is different in this case. We are interested in exploring which binary classifier would be performing the best for this specific dataset, and thus using random forest is yet another way of achieving our ultimate goal. Therefore, I tried to build models and compare them against common benchmarks, which I introduced earlier.
-3. Random forest produced a beatiful ROC curve, resulting in **AUC score of 80%**. Interestingly, as one might look at the accuracy scores of the training and validation datasets, we have incredibly high accuracy (~100%) for the training dataset and moderate results (~85-86%) for the validation, which I will address in the following section. Additionally, the best predictor for this model is **absense or presense of stroke**, as our model's performance dropped to 0.797, compared to the 0.8 of the full model. This is interesting, as it contradicts previous findings of importance of the BMI and health status.
+1. Here I build 81 models and evaluated their RMSE scores. I have used CrossEntropyLoss as the loss function and SGD as the optimizer.
+2. There are so many models because I didn't want to randomly come up with a learning rate, weight decay, number of neurons per layer, and activation functions. Thus, I tried all possible combinations and see which ones would be the most optimal for my dataset.
+3. I found that RMSE heavily depends on the activation function and number of neurons in the layer. The best RMSE score I have achieved was **10.47** with the following configuration: 1 hidden layer, 45 neurons, and no activation function. This was the best RMSE score I have achieved so far.
 
 <figure>
-  <img src="pics/question3_fig1.png" alt="Fig. 3.1 - Heat map of different models and AUC scores" height="300">
-  <figcaption>Fig. 3.1 - Heat map of different models and AUC scores.</figcaption>
+  <img src="pics/question4_fig1.png" alt="Fig. 4.1 - Heat map of different models and RMSE scores" height="300">
+  <figcaption>Fig. 4.1 - Heat map of different models and RMSE scores.</figcaption>
 </figure>
 
-4. As we have seen, there is a significant gap between the accuracy on the training set and the validation set, along with a high AUC which suggests potential overfitting of this random forest model. This might be because of a number of reasons, but I suggest that the main one would be imbalance of my classes in this dataset. It is obvious that we have more people without diabetes than people with. Thus, due to this significant imbalance. This is also illustrated and confirmed by the following figure. Thus, this model would not be the best one to judge upon the performance. Maybe this is a reason why we have totally different best predictor with this model.
+4. Again, just like in the previous questions, I have to mention that the results are extremely sensitive to the hypermaters I used + the random seed I passed when splitting the dataset. This is not good, as it requires a lot of training and taking averages to make sure that the model is generalizable. This is a big drawback of the NN, as we never would have deterministic outputs of models, unless we train it a lot and make sure it is converging to a certain value. We have completely different results, once we get to different activation functions, and it is not surprising. This is something I have been expecting along the way, since previous obesrvations proved the same.
 
 ---
 
