@@ -6,45 +6,46 @@
 
 ### Question 1: Build and train a Perceptron (one input layer, one output layer, no hidden layers and no activation functions) to classify diabetes from the rest of the dataset. What is the AUC of this model?
 
-1. First of all, data cleaning. I have prepared the data by examining the frequency distributions and understanding the essense of the data we are working with. Surprisingly, there were almost no rows containing NaN values, so I simply dropped them and standardized all the categorical and ordinal variables (i.e. BMI, general/mental/physical health and etc.) After that was done, I have one-hot-encoded categorical (sex and zodiac sign) variables, and built a simple perceptron. No hidden layers, just inputs are matched to the outputs without intermediary middlemen. 
+1. First of all, data cleaning. I have prepared the data by examining the frequency distributions and understanding the essense of the data we are working with. Surprisingly, there were almost no rows containing NaN values, so I simply dropped them and standardized all the categorical and ordinal variables (i.e. BMI, general/mental/physical health and etc.) After that was done, I have one-hot-encoded categorical (sex and zodiac sign) variables, and built a simple perceptron. No hidden layers, just inputs are matched to the outputs without intermediary middlemen.
 
 2. I cleaned the data the way I did, simply because I wanted to derive all my predictors to a common scale, so that the model will see which predictors should be given more weight by itself. I have decided to drop the zodiac sign predictor because it is not being helpful in predicting diseases as all the samples we had in the dataset were uniformly distributed (discussed this in the previous homework assignment) with regards to the zodiac sign as we have seen above.
-   
 3. I have found that the AUC for the approach I exploited for the logistic regression model is **0.752**, which is not surprizing given that my neural model is barely learning anything about the dataset. In addition to that, I have found out that the perfomance of the model is really not that good, as we have low recall (0.51), low F1 score (0.37), and low precision (0.29) when predicting the presence of diabetes.
 
 <figure>
-  <img src="pics/question1_fig1.png" alt="Fig. 1.1 - This is a description of the image." height="300">
-  <figcaption>Fig. 1.1 - This is a description of the image.</figcaption>
+  <img src="pics/question1_fig1.png" alt="Fig. 1.1 - Confusion matrix." height="300">
+  <figcaption>Fig. 1.1 - Confusion matrix.</figcaption>
 </figure>
 <figure>
-  <img src="pics/question1_fig2.png" alt="Fig. 1.2 - This is a description of the image." height="300">
-  <figcaption>Fig. 1.2 - This is a description of the image.</figcaption>
-</figure>
-<figure>
-  <img src="pics/question1_fig3.png" alt="Fig. 1.3 - This is a description of the image." height="300">
-  <figcaption>Fig. 1.3 - This is a description of the image.</figcaption>
+  <img src="pics/question1_fig2.png" alt="Fig. 1.2 - ROC curve for Perceptron." height="300">
+  <figcaption>Fig. 1.2 - ROC curve for Perceptron.</figcaption>
 </figure>
 
 4. Although I am having quite an impressive AUC score, it doesn't necessarily mean that my model is doing great. Given the recall, precision, and F1 numbers I got for the the prediction of 1 (having diabetes), it rather means that model is mostly calling that patient not ill simply because there is a higher probabilistic chance of having a 0, rather than 1. Thus, there is a need for us to investigate further models and approaches of making relevant improvements to the NN architecture in pursuit of better scores.
 
 ---
+
 # NOT FINISHED YET
 
-### Question 2: Build a SVM. Doing so: What is the best predictor of diabetes and what is the AUC of this model?
+### Question 2: Build and train a feedforward neural network with at least one hidden layer to classify diabetes from the rest of the dataset. Make sure to try different numbers of hidden layers and different activation functions (at a minimum reLU and sigmoid). Doing so: How does AUC vary as a function of the number of hidden layers and is it dependent on the kind of activation function used (make sure to include “no activation function” in your comparison). How does this network perform relative to the Perceptron?
 
 1. For this task, I followed a similar pipeline with the data I cleaned for the previous question. I have build a Linear SVM so it would converge quickly with my dataset and then estimated its accuracy using k-fold strategy and hypermarater tuning. Finally, I have estimated the AUC score for the full model and for 21 other models with dropped predictors to find out which one is the most significant for this model.
 2. The rational for this question is simply to run through all the metrics that are available to us (and which I have used in the previous tasks) to compare the model performance against the common baseline. As usual, I used cross validation strategy to make sure that the model would be easily generalizable with new data.
 3. I have found that the most important predictor for this approach was **BMI** with the AUC dropping down from **0.5314609773465011** by **0.015371866003117907**. But generally, I must admit that this model **was not** as performative as the previous one. I am attaching the results I got and I will discuss them in the following section.
 
-<img src="pics/question2_fig1.png" alt="Fig. 2.1 - ROC curve for the full SVM model" height="300">
-<img src="pics/question2_fig2.png" alt="Fig. 2.2 - Performance of different SVM models with a single dropped predictor" height="300">
-<img src="pics/question2_fig3.png" alt="Fig. 2.3 - Learning curve of the SVM model" height="300">
+<figure>
+  <img src="pics/question2_fig1.png" alt="Fig. 2.1 - Heat map of different models and AUC scores" height="300">
+  <figcaption>Fig. 2.1 - Heat map of different models and AUC scores.</figcaption>
+</figure>
+<figure>
+  <img src="pics/question2_fig2.png" alt="Fig. 2.2 - Heat map of different models and RMSE scores" height="300">
+  <figcaption>Fig. 2.2 - Heat map of different models and RMSE scores.</figcaption>
+</figure>
    
 4. The main reason for such a relatively high accuracy and low AUC score is mainly due to the linearly inseparable nature of the data we are working with. Additionally, since diabetes is rather uncommon, it is easy for the model to keep calling that the person is not ill and getting an accuracy score higher. Finally, I have to say that the best predictor of diabetes in this approach would be BMI, which is surprizing as it was second best predictor in the previous model. This implies that there is a real significance in the BMI as in the diabetes prediction marker.
 
 ---
 
-### Question 3: Use a single, individual decision tree. Doing so: What is the best predictor of diabetes and what is the AUC of this model?
+### Question 3: Build and train a “deep” network (at least 2 hidden layers) to classify diabetes from the rest of the dataset. Given the nature of this dataset, is there a benefit of using a CNN for the classification?
 
 1. Here I build a single decision tree and evaluated its accuracy and AUC scores. Additionally, I have build 21 other models to figure out which predictor would be the most important one for this model.
 
@@ -52,15 +53,20 @@
 
 3. The most significant predictor is for this model is **Body Mass Index**. The drop in the model's performance reaches its peak of **0.013226036025215548** when we have the lowest AUC score of **0.5818026023929124**, compared to the initial **0.5950286384181279** for the full model. Additionally, as one might look at the accuracy chart, we have incredibly high accuracy for the training dataset and moderate results for the validation, which I try to explain in the following section.
 
-<img src="pics/question3_fig1.png" alt="Fig. 3.1 - ROC curve for the full single decision tree model" height="300">
-<img src="pics/question3_fig2.png" alt="Fig. 3.2 - Performance of different single decision tree models with a single dropped predictor" height="300">
-<img src="pics/question3_fig3.png" alt="Fig. 3.3 - Learning curve of the single decision tree model" height="300">
+<figure>
+  <img src="pics/question3_fig1.png" alt="Fig. 3.1 - Heat map of different models and AUC scores" height="300">
+  <figcaption>Fig. 3.1 - Heat map of different models and AUC scores.</figcaption>
+</figure>
+<figure>
+  <img src="pics/question3_fig2.png" alt="Fig. 3.2 - Heat map of different models and RMSE scores" height="300">
+  <figcaption>Fig. 3.2 - Heat map of different models and RMSE scores.</figcaption>
+</figure>
 
 4. The reason for the accuracy being so high for the training set and a drop whenever we using validation set is simply because of the main drawback of the single decision trees, which is that they tend to overfit the training dataset (a.k.a. memorizing it entirely). Thus, the accuracy is nearly 100%, since we simply memorized the data during the training stage. This makes perfect sense once we look at the ROC curve and AUC score, since the model performs poorly when it is trying to classify whether a random person having diabetes is actually having diabetes and conversely. Thus we have low AUC scores and incredible accuracy. The best predictor interestingly stays the same even though we poorly handle classification, we do recognize the importance of **body mass index**.
 
 ---
 
-### Question 4: Build a random forest model. Doing so: What is the best predictor of diabetes and what is the AUC of this model?
+### Question 4: Build and train a feedforward neural network with one hidden layer to predict BMI from the rest of the dataset. Use RMSE to assess the accuracy of your model. Does the RMSE depend on the activation function used?
 
 1. For this question, I have built a random forest model and created 21 separate models to assess the AUC of each respective one. After that, I have additionally performed the k-fold cross validation for sake of making sure that the model could be generalized. The pipeline stays the same for this question as it was in the previous ones, since the goal is similar.
 2. The rationale pretty much is the same, its just that the approach and the modelling preference is different in this case. We are interested in exploring which binary classifier would be performing the best for this specific dataset, and thus using random forest is yet another way of achieving our ultimate goal. Therefore, I tried to build models and compare them against common benchmarks, which I introduced earlier.
@@ -76,7 +82,7 @@
 
 ---
 
-### Question 5: Build a model using adaBoost. Doing so: What is the best predictor of diabetes and what is the AUC of this model?
+### Question 5: Build and train a neural network of your choice to predict BMI from the rest of your dataset. How low can you get RMSE and what design choices does RMSE seem to depend on?
 
 1. For this question, the pipeline of actions stays pretty much the same -- building a full model, estimating the AUC score for it, then creating 21 separate models and evaluating them one by one. Traditionally, I have been working on the cross validation for this dataset to show the learning curve trajectory.
 2. I have made sure that we validate all the results on the fly and tune the hypermaraters by performing k-fold cross validation on the training and validation sets. I also made sure to use the default setting of the AdaBoost provided by the `sklearn` library to avoid overcomplication of the model. This is because the dataset we are using has >250k datapoints and 21 features we have to train on, and adaboost could become computationally intense in these cases.
