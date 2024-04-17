@@ -45,12 +45,11 @@
 
 ### Question 3: Build and train a “deep” network (at least 2 hidden layers) to classify diabetes from the rest of the dataset. Given the nature of this dataset, is there a benefit of using a CNN for the classification?
 
-1. Here I build 81 models and evaluated their RMSE and AUC scores. I have used CrossEntropyLoss as the loss function and SGD as the optimizer. There are so many models
+1. Here I build 9 models and evaluated their RMSE and AUC scores. I have used CrossEntropyLoss as the loss function and SGD as the optimizer.
 
-2. The intuition stays the same as in previous models, where I tried to build a model and compare it against common benchmarks. As usual, 21 additional models serve as a great way of estimating which exact predictor is the best one for my particular model and my guess would be that
+2. The intuition stays the same as in previous models, where I tried to build a model and compare it against common benchmarks. I have used different combos of activation functions and number of hidden layers to see which one would be the best for my dataset. After that, I have taken the best performing model and analyzed it.
 
-3. The most significant predictor is for this model is **Body Mass Index**. The drop in the model's performance reaches its peak of **0.013226036025215548** when we have the lowest AUC score of **0.5818026023929124**, compared to the initial **0.5950286384181279** for the full model. Additionally, as one might look at the accuracy chart, we have incredibly high accuracy for the training dataset and moderate results for the validation, which I try to explain in the following section.
-
+3. I have found that AUC is definetely sensitive with respect to the number of hidden layers and the activation function used. The best AUC score I have achieved was **0.72** with the following configuration: 2 hidden layers, 15 neurons, and Sigmoid activation function. This is roughly as good as the Perceptron model. It was surprising to learn that some of the deep networks with more than 2 layers were even performing worse than the Perceptron model.
 <figure>
   <img src="pics/question3_fig1.png" alt="Fig. 3.1 - Heat map of different models and AUC scores" height="300">
   <figcaption>Fig. 3.1 - Heat map of different models and AUC scores.</figcaption>
@@ -60,7 +59,7 @@
   <figcaption>Fig. 3.2 - Heat map of different models and RMSE scores.</figcaption>
 </figure>
 
-4. The reason for the accuracy being so high for the training set and a drop whenever we using validation set is simply because of the main drawback of the single decision trees, which is that they tend to overfit the training dataset (a.k.a. memorizing it entirely). Thus, the accuracy is nearly 100%, since we simply memorized the data during the training stage. This makes perfect sense once we look at the ROC curve and AUC score, since the model performs poorly when it is trying to classify whether a random person having diabetes is actually having diabetes and conversely. Thus we have low AUC scores and incredible accuracy. The best predictor interestingly stays the same even though we poorly handle classification, we do recognize the importance of **body mass index**.
+4. CNN would not be beneficial in this case, as we don't have the data in the form of images. CNNs are good at learning local patterns in the data, and since we don't have any significant colineartiy in the data, it would not be beneficial to use CNNs for this particular dataset. It is also worth mentioning once again that all the models were sensitive to the random seed of the train/test data split. This implies that the model is not generalizable and we need to take averages of the models to make sure that the model is generalizable.
 
 ---
 
