@@ -25,6 +25,7 @@ statsmodels = "^0.14.1"
 torchvision = "^0.17.1"
 umap-learn = "^0.5.5"
 gym = "^0.26.2"
+pygame = "^2.5.2"
 
 
 [tool.poetry.group.dev.dependencies]
