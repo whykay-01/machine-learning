@@ -3318,6 +3318,20 @@ files = [
 ]
 
 [[package]]
+name = "sklearn-som"
+version = "1.1.0"
+description = "A simple planar self organizing map"
+optional = false
+python-versions = "*"
+files = [
+    {file = "sklearn-som-1.1.0.tar.gz", hash = "sha256:9b8107f42dfbd68db0d1aa75dd2007be4e0136bf0af96da51513e295f76646d9"},
+    {file = "sklearn_som-1.1.0-py3-none-any.whl", hash = "sha256:92b774da67fe5fb73cf0697e93bda63923060c121ae0383c4ecce638d1385719"},
+]
+
+[package.dependencies]
+numpy = "*"
+
+[[package]]
 name = "sniffio"
 version = "1.3.0"
 description = "Sniff out which async library your code is running under"
@@ -3832,4 +3846,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "e71c883e9bdf8e401ceaf975441ecc98ff9e90af4ddba4c69d814c6d5700112d"
+content-hash = "5f8bd12e56f2ccefcc383961f7d0636d02269479866c51bb309e95a0e6d85643"
