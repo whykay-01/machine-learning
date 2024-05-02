@@ -11,7 +11,6 @@
 2. I standardized the data because all the dimension reduction methods are sensitive to scales. I did plot the variance explained by each of the principal components to see how much of the total variance is explained by first 2 PCs, and the eigenvalues to see how many of them are above 1. I also created PC loading maps for each of the 2 dimensions to see which features are most important for each of them.
 
 3. There are 3 eigenvalues above 1, which means that the first 3 principal components explain more variance than a single feature. The first 2 PCs explain 55% of the total variance, and the third PC explains 11%. The first PC is mostly influenced by the features that contribute to a wine's **color, aroma, taste**, clarity, and structure, while the second PC is mostly influenced by the features related to **wine's mineral composition, alcohol concentration, depth and saturation of the color, texture**. Please see the figures below to explore the results I got.
-   
 
 <figure>
   <img src="pics/question1_fig1.png" alt="Fig. 1.1 - 2D Plot of principal components." height="300">
@@ -30,7 +29,7 @@
   <figcaption>Fig. 1.4 - Eigenvalues.</figcaption>
 </figure>
 
-4. Interpretation-wise, I am thinking that the first principal component is responsible for the primary factors that determine what kind of wine are we dealing with (i.e. sensory indicators seen by the humans) -- color, aroma, taste. It is not surprising as humans probably created all these different sorts of wines to have different sensory experiences. The second principal component might be reflective of the chemical filling of the wine. Top contributors to this component were alcohol concentration, proline content (amino acids), and color intensity. Those features are rather something chemists use to describe the nature of the liquid when analyzing them.   
+4. Interpretation-wise, I am thinking that the first principal component is responsible for the primary factors that determine what kind of wine are we dealing with (i.e. sensory indicators seen by the humans) -- color, aroma, taste. It is not surprising as humans probably created all these different sorts of wines to have different sensory experiences. The second principal component might be reflective of the chemical filling of the wine. Top contributors to this component were alcohol concentration, proline content (amino acids), and color intensity. Those features are rather something chemists use to describe the nature of the liquid when analyzing them.
 
 ---
 
@@ -41,12 +40,16 @@
 3.
 
 <figure>
-  <img src="pics/question2_fig1.png" alt="Fig. 2.1 - Heat map of different models and AUC scores" height="300">
-  <figcaption>Fig. 2.1 - Heat map of different models and AUC scores.</figcaption>
+  <img src="pics/question2_fig1.png" alt="Fig. 2.1 - KL-convergence with respect to perplexity." height="300">
+  <figcaption>Fig. 2.1 - KL-convergence with respect to perplexity.</figcaption>
 </figure>
 <figure>
-  <img src="pics/question2_fig2.png" alt="Fig. 2.2 - Heat map of different models and RMSE scores" height="300">
-  <figcaption>Fig. 2.2 - Heat map of different models and RMSE scores.</figcaption>
+  <img src="pics/question2_fig2.png" alt="Fig. 2.2 - t-SNE with perplexity of 30 (optimal according to the previous convergence)." height="300">
+  <figcaption>Fig. 2.2 - t-SNE with perplexity of 30 (optimal according to the previous convergence).</figcaption>
+</figure>
+<figure>
+  <img src="pics/question2_fig3.png" alt="Fig. 2.3 - t-SNE with perplexity of 20" height="300">
+  <figcaption>Fig. 2.3 - t-SNE with perplexity of 20.</figcaption>
 </figure>
    
 4.
@@ -58,12 +61,12 @@
 1.
 2.
 3. <figure>
-     <img src="pics/question3_fig1.png" alt="Fig. 3.1 - Heat map of different models and AUC scores" height="300">
-     <figcaption>Fig. 3.1 - Heat map of different models and AUC scores.</figcaption>
+     <img src="pics/question3_fig1.png" alt="Fig. 3.1 - " height="300">
+     <figcaption>Fig. 3.1 - .</figcaption>
    </figure>
    <figure>
-     <img src="pics/question3_fig2.png" alt="Fig. 3.2 - Heat map of different models and RMSE scores" height="300">
-     <figcaption>Fig. 3.2 - Heat map of different models and RMSE scores.</figcaption>
+     <img src="pics/question3_fig2.png" alt="Fig. 3.2 - " height="300">
+     <figcaption>Fig. 3.2 - .</figcaption>
    </figure>
 
 4.
@@ -77,8 +80,8 @@
 3.
 
 <figure>
-  <img src="pics/question4_fig1.png" alt="Fig. 4.1 - Heat map of different models and RMSE scores" height="300">
-  <figcaption>Fig. 4.1 - Heat map of different models and RMSE scores.</figcaption>
+  <img src="pics/question4_fig1.png" alt="Fig. 4.1 - " height="300">
+  <figcaption>Fig. 4.1 - .</figcaption>
 </figure>
 
 4.
