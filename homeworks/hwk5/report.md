@@ -60,16 +60,17 @@
 
 1.
 2.
-3. <figure>
-     <img src="pics/question3_fig1.png" alt="Fig. 3.1 - " height="300">
-     <figcaption>Fig. 3.1 - .</figcaption>
-   </figure>
-   <figure>
-     <img src="pics/question3_fig2.png" alt="Fig. 3.2 - " height="300">
-     <figcaption>Fig. 3.2 - .</figcaption>
-   </figure>
+3. Multidimensional scaling aims to preserve the distances between pairs of data points, focusing on pairs of distant points in the original space. The stress in MDS measures the difference between the observed reaction time between semantic pairs and the estimated one using one or more estimated stimuli dimensions. The lower the stress the better the fit. As we discovered with the MDS approach 
+<figure>
+ <img src="pics/question3_fig1.png" alt="Fig. 3.1 - " height="300">
+ <figcaption>Fig. 3.1 - .</figcaption>
+</figure>
+<figure>
+ <img src="pics/question3_fig2.png" alt="Fig. 3.2 - " height="300">
+ <figcaption>Fig. 3.2 - .</figcaption>
+</figure>
 
-4.
+4. Using MDS on our dataset is not the best idea, since we are seeing high stress value (low fit to the data) + fairly sparse plot of datapoints on it.
 
 ---
 
