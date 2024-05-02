@@ -35,9 +35,9 @@
 
 ### Question 2: Use t-SNE on the data. How does KL-divergence depend on Perplexity (vary Perplexity from 5 to 150)? Make sure to plot this relationship. Also, show a plot of the 2D component with a Perplexity of 20.
 
-1.
-2.
-3.
+1. First of all, I have tried all sorts of t-SNE models with different perplexities and measured how the KL-convergence is changing for them. I have made sure to plot 2 dimensions with perplexity of 20, and additionally I plotted how the KL-convergence is changing + rate of change for those models.
+2. The rationale for plotting the KL-convergence change and rate of change was to find out the perplexity at which KL-convergence drops the most. This way, I thought I would be able to find the most optimal perplexity value. Additionaly, I was interested in exploring how different perplexity values would affect the performance of the model and how well the data would be separated in the end.
+3. t-SNE with perplexity of 20 and 30 were the most effecient among the other models. The most efficient in my opinion, was the model with the perplexity of 20, since it is providing the easiest separation between the clusters (with KL-convergence around 0.45). Additionally, I found that the higher the perplexity value was, the lower the KL-convergence was. The highest rates of changes were detected at the initial steps, which probably implies that the lower perplexity values make the most difference and sense, since we are more interested in local views of our clusters.
 
 <figure>
   <img src="pics/question2_fig1.png" alt="Fig. 2.1 - KL-convergence with respect to perplexity." height="300">
@@ -52,7 +52,7 @@
   <figcaption>Fig. 2.3 - t-SNE with perplexity of 20.</figcaption>
 </figure>
    
-4.
+4. t-SNE with perplexity of 20 and 30 were the most effecient among the other models. This is because higher perplexity values tend to result in more global views of the data, where points are spread out more evenly in the embedding space. Lower perplexity values lead to more local views, where clusters and small-scale structures are emphasized. In our case, we were more interested in local views, thus lower perplexity values yielded the best "separation" of potential clusters.
 
 ---
 
