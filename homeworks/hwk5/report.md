@@ -123,3 +123,5 @@ I think by now it is obvious that there are 3 kinds of wine which could be infer
 ---
 
 #### B) Is there anything of interest you learned about wines from exploring this dataset with unsupervised machine learning method that is worth noting and not already covered in the questions above?
+
+It was certainly interesting to learn that not only color contributes to what kind of wine are we classifying. Also, it is interesting how the fact that wines are mostly about having small local features influences the results of our findings. No wonder t-SNE was the best approach to solve this problem as it is about preserving probabilities.
