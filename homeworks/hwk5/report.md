@@ -58,55 +58,67 @@
 
 ### Question 3: Use MDS on the data. Try a 2-dimensional embedding. What is the resulting stress of this embedding? Also, plot this solution and comment on how it compares to t-SNE.
 
-1.
-2.
-3. Multidimensional scaling aims to preserve the distances between pairs of data points, focusing on pairs of distant points in the original space. The stress in MDS measures the difference between the observed reaction time between semantic pairs and the estimated one using one or more estimated stimuli dimensions. The lower the stress the better the fit. As we discovered with the MDS approach 
+1. I have simply used the basic MDS class to build a 2D projection of the data. After that, I have found what was the stress of this lower-dimensional embeddings.
+2. This was done in the same spirit as previous questions and experiments. I wanted to know one metric that would show me the performance of the algorithm as well as to see how well the datapoints are mapped onto a 2D space. 
+3. Multidimensional scaling aims to preserve the distances between pairs of data points, focusing on pairs of distant points in the original space. The stress in MDS measures the difference between the observed reaction time between semantic pairs and the estimated one using one or more estimated stimuli dimensions. The lower the stress the better the fit. As we discovered with the MDS approach the stress of the embedding: **21021.36**, which is an extremely high value, thus one can conclude that this is probably not the best dimension reduction approach given the nature of our dataset.
+   
 <figure>
- <img src="pics/question3_fig1.png" alt="Fig. 3.1 - " height="300">
- <figcaption>Fig. 3.1 - .</figcaption>
-</figure>
-<figure>
- <img src="pics/question3_fig2.png" alt="Fig. 3.2 - " height="300">
- <figcaption>Fig. 3.2 - .</figcaption>
+ <img src="pics/question3_fig1.png" alt="Fig. 3.1 - MDS results" height="300">
+ <figcaption>Fig. 3.1 - MDS results.</figcaption>
 </figure>
 
-4. Using MDS on our dataset is not the best idea, since we are seeing high stress value (low fit to the data) + fairly sparse plot of datapoints on it.
+
+4. Using MDS on our dataset is not the best idea, since we are seeing high stress value (low fit to the data) + fairly sparse plot of datapoints on it, which makes it harder than with previous experiments to conduct any clusterrings, as it is super ambigious to agree on the exact most-optimal number of clusters. 
 
 ---
 
 ### Question 4: Building on one of the dimensionality reduction methods above that yielded a 2D solution (1-3, your choice), use the Silhouette method to determine the optimal number of clusters and then use kMeans with that number (k) to produce a plot that represents each wine as a dot in a 2D space in the color of its cluster. What is the total sum of the distance of all points to their respective clusters centers, of this solution?
 
-1.
-2.
-3.
+1. I build on top of t-SNE solution by identifying the number **k** with the use of silhouette scores and distortion scores. After receiving the ultimate number of clusters, I have decided to build on top on that, and plot the solution. See the next sections for more details.
+2. I have decided to build on top of the t-SNE solution as it provided the best separation of my data, thus clusterring should be done pretty easily. Additionally, I thought that measuring both distortion and silhouette scores can help me with cross-verifying the results for the number **k**, and surprisingly enough both distortion and silhouette scores agreed on the same number.
+3. The optimal number of centroids as derived by the silhouette scores is 3. This was done using the grid search by maximizing the results of the silhouette scores and minimizing the distortion. k-Means algorithm knowing this number further derived the location of each individual cluster center, and as we can see from the figures below, they are located beautifully in the centers of our potential clusters. The total sum of the sum of the distance of all points to their respective clusters centers is **862.7615**.
 
 <figure>
   <img src="pics/question4_fig1.png" alt="Fig. 4.1 - " height="300">
-  <figcaption>Fig. 4.1 - .</figcaption>
+  <figcaption>Fig. 4.1 - Sharp increase of the silhouette score when k=3.</figcaption>
+</figure>
+<figure>
+  <img src="pics/question4_fig2.png" alt="Fig. 4.2 - " height="300">
+  <figcaption>Fig. 4.2 - Drop of distortion (distance to the centroids) when k=3.</figcaption>
+</figure>
+<figure>
+  <img src="pics/question4_fig3.png" alt="Fig. 4.3 - t-SNE clustering with 3 clusters derived by k-Means" height="300">
+  <figcaption>Fig. 4.3 - t-SNE clustering with 3 clusters derived by k-Means.</figcaption>
+</figure>
+<figure>
+  <img src="pics/question4_fig4.png" alt="Fig. 4.4 - k-Means clustering with 3 centroids" height="300">
+  <figcaption>Fig. 4.4 - k-Means clustering with 3 centroids.</figcaption>
 </figure>
 
-4.
+4. k-Means algorithm with appropriate hyperparameters yielded great results, as we saw from the plots above. Our previously detected 3 areas in t-SNE finally were allocated to potential clusters. Additionally, it was great to see that there is a largest drop in distortions for the most appropriate number of clusters as well as the largest increase of the silhouette score for that very same value. I think our dataset might be actually having just 3 major clusters (aka three kinds of wine).
 
 ---
 
 ### Question 5: Building on one of the dimensionality reduction methods above that yielded a 2D solution (1-3, your choice), use dBScan to produce a plot that represents each wine as a dot in a 2D space in the color of its cluster. Make sure to suitably pick the radius of the perimeter (“epsilon”) and the minimal number of points within the perimeter to form a cluster (“minPoints”) and comment on your choice of these two hyperparameters.
 
-1.
-2.
-3.
+1. For this question, as well as for the previous one, I have decided to go with the most well-trusted strategy of grid searching for the most appropriate epsilon and the minimal number of points within the perimeter. After that, I have plotted the solution with the points that were identified as not belonging to any clusters and points that belong to a certain cluster. I have made sure to make the core samples in each cluster bold.
+2. I thought, that my domain knowledge and eyeballing is not good enough to just come up with the most appropriate number for epsilon and the minPoints, thus I decided to go with the grid search to find out the best values. Also, since we have a luxury of identifying the core points that most certainly belong to a cluster with this approach, I have made sure to show them.
+3. I figured that the most appropriate epsilon would be 3, since that number yielded the best silhouette soefficient of 0.594. Additionally, I have practically came up with the minPoints hyperparameter, as that number yielded the best number of unidentified points and they were actually the most reasonably identified ones from the plot. 
 
 <figure>
-  <img src="pics/question5_fig1.png" alt="Fig. 5.1 - RMSE vs. epochs function" height="300">
-  <figcaption>Fig. 5.1 - RMSE vs. epochs function.</figcaption>
+  <img src="pics/question5_fig1.png" alt="Fig. 5.1 - 2D dBScan soluition" height="300">
+  <figcaption>Fig. 5.1 - 2D dBScan soluition.</figcaption>
 </figure>
 
-4.
+4. I think that this particular method was the best one to produce a classification task, as we have found the core points and the points that are on the borderline + unidentified points, which in my opinion is the best way of clusterring all those points. Some of them were quite ambigious and it is great that dBScan with tuned hyperparameters yielded such a great result. Speaking of the epsilon values, I think it makes sense that our grid search ended up with such a number, since we have points in clusters which are closely located to one another. 
 
 ---
 
 ### Extra Credit
 
 #### A) Given your answers to all of these questions taken together, how many different kinds of wine do you think there are and how do they differ?
+
+I think by now it is obvious that there are 3 kinds of wine which could be inferred from this dataset. As we saw from the PCA solution, different kinds of wines are influenced by the features that contribute to a wine's **color, aroma, taste**, clarity, and structure. While other important contributors are related to **wine's mineral composition, alcohol concentration, depth and saturation of the color, texture**, or chemical composition of them. And it makes sense. We, humans define wine based on the color and aroma (white or red, or rosé) as well as the texture (sparkling or not sparkling).
 
 ---
 
